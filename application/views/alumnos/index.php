@@ -44,7 +44,7 @@
 	  <div class="form-group">
     <input type="hidden" name="id" id="id_edit" value="" >
             <label for=""><b class="text-danger">*</b>Nombre:</label>
-            <input type="text" name="nombre" placeholder="Ingrese el nombre" id="nombre" class="form-control" value="" >
+            <input type="text" name="nombre" placeholder="Ingrese el nombre" id="nombre" class="form-control" value="">
         </div>
 		<div class="form-group">
             <label for=""><b class="text-danger">*</b>Apellidos:</label>
@@ -52,7 +52,7 @@
         </div>
         <div class="form-group">
             <label for=""><b class="text-danger">*</b>Dpi:</label>
-            <input type="text" name="dpi" maxlength="13" placeholder="Ingrese el DPI xxxxxxxxxxxxx" id="dpi" class="form-control" value="">
+            <input type="text" name="dpi" maxlength="15" placeholder="Ingrese el DPI xxxx-xxxxx-xxxx" id="dpi" class="form-control" value="">
         </div>
         <div class="form-group">
             <label for=""><b class="text-danger">*</b>Dirección:</label>
@@ -134,14 +134,32 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     
+    
+
+
   <script>
+
+
   $(document).on("click", "#agregar", function(e)
 	{
+
     $('#Modal').modal('show');
     $("#update").hide();
     $("#add").show();
     $("#ModalLabel").text("Ingreso Alumnos");
 		e.preventDefault();
+    const  generateRandomString = (num) => {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789abcdefghijklmnopqrstuvwxyz';
+    let result1= ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < num; i++ ) {
+        result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result1;
+}
+    var aleat = generateRandomString(8);
+    $("#nombre").val(aleat);
   
   });
   
