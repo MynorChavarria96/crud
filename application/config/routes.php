@@ -11,3 +11,8 @@ $route['delete'] = 'Alumnos_controller/delete';
 $route['edit'] = 'Alumnos_controller/edit';
 $route['update'] = 'Alumnos_controller/update';
 
+$route['inicio'] = 'Inicio_Controller/inicio';
+$route['login'] = 'LoginController/login';
+$route['validar'] = 'LoginController/validar';
+$route['existe'] = 'LoginController/existe';
+$route['valida'] = 'Api_User/update';

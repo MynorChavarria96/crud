@@ -17,6 +17,7 @@ class Alumnos_controller extends CI_Controller {
 	{
 		$this->load->view('alumnos/index');
 	}
+	
 
 	public function insert()
 	{

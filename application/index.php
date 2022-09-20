@@ -6,57 +6,10 @@ $auth = $_SESSION['login'];
 
 if(!$auth)
 {
-  header('Location: http://localhost/crud/inicio');
+  header('Location: http://3.144.78.104/crud/index.php/inicio');
 }
 
 ?>
-
-<?php
-$location = "https://banguat.gob.gt/variables/ws/TipoCambio.asmx?WSDL";
-
-$request= '
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:ws="http://www.banguat.gob.gt/variables/ws/">
-   <soapenv:Header/>
-   <soapenv:Body>
-      <ws:TipoCambioDia/>
-   </soapenv:Body>
-</soapenv:Envelope>
-';
-
-print("Resquest : <br>");
-print("<pre>".htmlentities($request)."</pre>");
-
-$action = "TipoCambioDia";
-$headers = [
-    'Method: POST',
-    'Connection: Keep-Alive',
-    'User-Agent: Apache-HttpClient/4.5.5 (Java/16.0.1)',
-    'Content-Type: text/xml;charset=UTF-8',
-    'SOAPAction: http://www.banguat.gob.gt/variables/ws/TipoCambioDia',
-];
-
-//Segun Documentacion
-$ch = curl_init($location);
-curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-curl_setopt($ch, CURLOPT_POST, true);
-curl_setopt($ch, CURLOPT_POSTFIELDS, $request);
-curl_setopt($ch, CURLOPT_HTTP_VERSION, CURL_HTTP_VERSION_1_1);
-
-$response = curl_exec($ch);
-$err_status = curl_errno($ch);
-
-print("Resquest : <br>");
-print("<pre>".$response."</pre>");
-
-?>
-
-
-
-
-
-
-
 
 <html lang="en">
   <head>

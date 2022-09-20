@@ -12,9 +12,11 @@ class Api extends REST_Controller {
 
     public function __construct() {
         parent::__construct();
-      
+       // error_reporting(0);
+        //$this->load->library("session");
+       // $this->load->helper('url');
         $this->load->model('Model2_alumnos','alum');
-     
+        //$this->load->model('MD_Alumnos','student');
     }
 
     public function index_get(){
@@ -30,9 +32,26 @@ class Api extends REST_Controller {
 
        
     }
-  
+    public function index2_get($a,$b,$c,){
+    
+        
+        $data = array
+        (
+            'status'=>200,
+            'data'=>$this->alum->getAlumno($a,$b,$c),
+            'comentario'=>'Todo bien'
+        );
+        $this->response($data); 
+
+       
+    }
+
+
+
+
     public function index_post(){
        
+     
 		$carrera = $this->input->post("carrera");
 		$anio = $this->input->post("anio");
 		$correlativo = $this->input->post("correlativo");
@@ -41,6 +60,7 @@ class Api extends REST_Controller {
 		$email = $this->input->post("email");
 		$codigo = $this->CreaCodigo(8);
 		
+
 			$data = array(
 				"carrera"=>$carrera,
 				"anio"=>$anio,
@@ -52,27 +72,36 @@ class Api extends REST_Controller {
 
 			);
 			if($this->alum->existe($correlativo)){
-
-
                 $res = array
                 (
                     'status'=>400,
                     'data'=>$this->alum->codigo($correlativo),
-                    'comentario'=>'El alumno ya existe'
+                    'comentario'=>'el alumno ya existe'
+
                 );
-             
+              
 
             }
             else{
                 $datos = $this->alum->save($data);
           
             if($datos) {
-                $res['status'] = 201;
-                $res['message'] = 'Registro Insertado';
+
+                $res = array
+                (
+                    'status'=>200,
+                    'comentario'=>'Registro Insertado'
+
+                );
+
                 
             } else {
-                $res['status'] = 400;
-                $res['message'] = 'insert failed';
+                $res = array
+                (
+                    'status'=>400,
+                    'comentario'=>'Fallo de insersión'
+
+                );
                
             }
 
@@ -82,8 +111,9 @@ class Api extends REST_Controller {
 		
     }
    
-   
-    
+ 
+
+
 function CreaCodigo($num)
 {
     $codigo ="";
@@ -94,7 +124,6 @@ function CreaCodigo($num)
     for ($i=0; $i < $num; $i++) {
         $codigo .= $cadena[mt_rand(0, $max-1)];
     }
-
     if($this->alum->existecodigo($codigo))
     {
         CreaCodigo(8);
@@ -104,7 +133,6 @@ function CreaCodigo($num)
     {
         return $codigo;
     }
-  
 
 }
     
